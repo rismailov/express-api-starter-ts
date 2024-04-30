@@ -8,7 +8,7 @@
         "dev": "nodemon src/index.ts",
         "build": "tsc",
         "start:dist": "node dist/src/index.js",
-        "lint": "eslint --fix src test",
+        "lint": "eslint --fix \"src/**/*.{ts,tsx}\"",
         "test": "jest",
         "test:watch": "jest --watch",
         "typecheck": "tsc --noEmit",
