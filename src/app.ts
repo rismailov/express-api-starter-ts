@@ -1,30 +1,25 @@
-import express from 'express';
-import morgan from 'morgan';
-import helmet from 'helmet';
-import cors from 'cors';
+import cors from 'cors'
+import dotenv from 'dotenv'
+import express from 'express'
+import helmet from 'helmet'
+import morgan from 'morgan'
 
-import * as middlewares from './middlewares';
-import api from './api';
-import MessageResponse from './interfaces/MessageResponse';
+import apiRouter from './api/api.router'
+import { API_PREFIX } from './constants'
+import * as middlewares from './middlewares'
 
-require('dotenv').config();
+dotenv.config()
 
-const app = express();
+const app = express()
 
-app.use(morgan('dev'));
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
+app.use(morgan('dev'))
+app.use(helmet())
+app.use(cors())
+app.use(express.json())
 
-app.get<{}, MessageResponse>('/', (req, res) => {
-  res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
-  });
-});
+app.use(API_PREFIX, apiRouter)
 
-app.use('/api/v1', api);
+app.use(middlewares.notFound)
+app.use(middlewares.errorHandler)
 
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
-
-export default app;
+export default app
