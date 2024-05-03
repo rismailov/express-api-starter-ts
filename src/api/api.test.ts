@@ -1,17 +1,18 @@
 import request from 'supertest'
 import app from '../app'
-import { API_PREFIX } from '../constants'
+import { API_PREFIX } from '../services/constants'
 
-describe(`GET ${API_PREFIX}/`, () => {
-    it('responds with a json message', () => {
+describe(`GET ${API_PREFIX}/healthcheck`, () => {
+    it('responds with OK', () => {
+        // prettier-ignore
         return request(app)
-            .get(`${API_PREFIX}/`)
-            .expect(200, { message: 'API - 👋🌎🌍🌏' })
+            .get(`${API_PREFIX}/healthcheck`)
+            .expect(200 )
     })
 })
 
 describe(`GET ${API_PREFIX}/non-existing-route`, () => {
-    it('responds with a 404', () => {
+    it('responds with not found', () => {
         // prettier-ignore
         return request(app)
             .get(`${API_PREFIX}/non-existing-route`)

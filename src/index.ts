@@ -1,8 +1,9 @@
 import app from './app'
+import config from './services/config'
+import { connectDB } from './services/db'
 
-const port = process.env.PORT || 4000
-app.listen(port, () => {
-    /* eslint-disable no-console */
-    console.log(`Listening: http://localhost:${port}`)
-    /* eslint-enable no-console */
+app.listen(config.port, async () => {
+    console.log(`Listening: http://localhost:${config.port}`)
+
+    await connectDB()
 })
