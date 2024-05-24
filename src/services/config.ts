@@ -3,7 +3,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export default {
-    version: 1,
-    port: 4000,
-    atlasUri: process.env.MONGO_URI || '',
+    VERSION: 1,
+    PORT: 4000,
+    APP_ENV: process.env.APP_ENV || 'development',
+    FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:3000',
 }
